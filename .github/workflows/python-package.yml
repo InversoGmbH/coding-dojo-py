@@ -37,9 +37,9 @@ jobs:
     - name: Set $PYTHONPATH
       run: |
         echo "::set-env name=PYTHONPATH::$GITHUB_WORKSPACE/src"
-    - name: Test with pytest
+    - name: Coverage with unittest
       run: |
         coverage erase
-        coverage run --source=test/ -m unittest romanconvertkata.romanconvert
+        coverage run --source=src/,test/ -m unittest romanconvertkata.test_romanconvert
         coverage report -m
       continue-on-error: true
