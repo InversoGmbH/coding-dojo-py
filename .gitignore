@@ -201,4 +201,4 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 # Vorbereitete Tests nicht einchecken
-test/*/*_praeparat.py
+test/*_praeparat.py

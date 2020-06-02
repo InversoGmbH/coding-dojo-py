@@ -40,6 +40,6 @@ jobs:
     - name: Coverage with unittest
       run: |
         coverage erase
-        coverage run --source=src/,test/ -m unittest romanconvertkata.test_romanconvert
+        coverage run --source=src/,test/ -m unittest test_romanconvert
         coverage report -m
       continue-on-error: true
