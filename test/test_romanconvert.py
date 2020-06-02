@@ -9,6 +9,6 @@ class TestRomanConvert(TestCase):
 
     def test_einser(self):
         """i, ii und iii als Eingabeparameter"""
-        self.assertEqual(roman2decimal('i'), 1)
-        self.assertEqual(roman2decimal('ii'), 2)
-        self.assertEqual(roman2decimal('iii'), 3)
+        self.assertEqual(1, roman2decimal('i'))
+        self.assertEqual(2, roman2decimal('ii'))
+        self.assertEqual(3, roman2decimal('iii'))
