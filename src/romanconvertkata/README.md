@@ -19,15 +19,15 @@ Diese Aufgabe wird testgetrieben umgesetzt. Für jeden Teilschritt findest du ei
 ### Werte
 Römische Zahl | Dezimalwert
 ------------- | -----------
-            i | 1
-            v | 5
-            x | 10
-            l | 50
-            c | 100
-            d | 500
-            m | 1000
-            ↁ | 5000
-           ↂ | 10000
+i | 1
+v | 5
+x | 10
+l | 50
+c | 100
+d | 500
+m | 1000
+ↁ | 5000
+ↂ | 10000
 
 ### Subtraktionsregel
 Die Subtraktionsregel ist eine übliche, verkürzende Schreibweise, mit der es vermieden werden soll, vier gleiche 
