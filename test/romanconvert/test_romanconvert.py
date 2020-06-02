@@ -6,6 +6,7 @@ from unittest import TestCase
 
 
 class TestRomanConvert(TestCase):
+
     def test_einser(self):
         """i, ii und iii als Eingabeparameter"""
         self.assertEqual(roman2decimal('i'), 1)
