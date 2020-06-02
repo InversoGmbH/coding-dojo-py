@@ -42,4 +42,3 @@ jobs:
         coverage erase
         coverage run --source=src/romanconvertkata,test/romanconvert -m unittest test.romanconvert.test_romanconvert
         coverage report -m
-      continue-on-error: true
