@@ -22,4 +22,10 @@ def roman2decimal(roman: str) -> int:
             ergebnis += 50
         if char == "d":
             ergebnis += 500
+        if char == "x":
+            ergebnis += 10
+        if char == "c":
+            ergebnis += 100
+        if char == "m":
+            ergebnis += 1000
     return ergebnis
