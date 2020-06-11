@@ -5,6 +5,53 @@ from romanconvertkata.romanconvert import roman2decimal
 from unittest import TestCase
 
 
+def _create_roman(zahl: int) -> str:
+    """
+    Übersetzt Dezimalzahl in Römische Zahl
+
+    :param zahl: Dezimalzahl
+    :return: Römische Zahl
+    """
+    romans_dict = {
+        1: "I",
+        5: "V",
+        10: "X",
+        50: "L",
+        100: "C",
+        500: "D",
+        1000: "M",
+        5000: "ↁ",
+        10000: "ↂ"
+    }
+
+    div = 1
+    while zahl >= div:
+        div *= 10
+
+    div /= 10
+
+    res = ""
+
+    while zahl:
+        last_num = int(zahl / div)
+        if last_num <= 3:
+            res += (romans_dict[div] * last_num)
+        elif last_num == 4:
+            res += (romans_dict[div] +
+                    romans_dict[div * 5])
+        elif 5 <= last_num <= 8:
+            res += (romans_dict[div * 5] +
+                    (romans_dict[div] * (last_num - 5)))
+        elif last_num == 9:
+            res += (romans_dict[div] +
+                    romans_dict[div * 10])
+
+        zahl = math.floor(zahl % div)
+        div /= 10
+
+    return res
+
+
 class TestRomanConvert(TestCase):
 
     def test_einser(self):
@@ -39,3 +86,16 @@ class TestRomanConvert(TestCase):
         self.assertEqual(90, roman2decimal('xc'))
         self.assertEqual(400, roman2decimal('cd'))
         self.assertEqual(900, roman2decimal('cm'))
+
+    def test_kombination(self):
+        """Kombiniere diverse römische Ziffern zu einer Zahl"""
+        self.assertEqual(8, roman2decimal('viii'))
+        self.assertEqual(42, roman2decimal('xlii'))
+        self.assertEqual(99, roman2decimal('xcix'))
+        self.assertEqual(2020, roman2decimal('mmxx'))
+
+    def test_random_kombination(self):
+        """Randomzahlen zwischen 1 und 3999 prüfen"""
+        for i in range(1, 100):
+            zahl = random.randint(i, 3999)
+            self.assertEqual(roman2decimal(_create_roman(zahl)), zahl)
