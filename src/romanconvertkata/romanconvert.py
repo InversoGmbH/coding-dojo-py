@@ -18,49 +18,51 @@ def roman2decimal(roman: str) -> int:
     for char in roman.lower():
         if char == "i":
             ergebnis += 1
-        if char == "v":
+        elif char == "v":
             if previous == "i":
                 ergebnis += 3
                 continue
             ergebnis += 5
-        if char == "l":
+        elif char == "l":
             if previous == "x":
                 ergebnis += 30
                 continue
             ergebnis += 50
-        if char == "d":
+        elif char == "d":
             if previous == "c":
                 ergebnis += 300
                 continue
             ergebnis += 500
-        if char == "x":
+        elif char == "x":
             if previous == "i":
                 ergebnis += 8
                 continue
             ergebnis += 10
-        if char == "c":
+        elif char == "c":
             if previous == "x":
                 ergebnis += 80
                 continue
             ergebnis += 100
-        if char == "m":
+        elif char == "m":
             if previous == "c":
                 ergebnis += 800
                 continue
             ergebnis += 1000
-        if char == "ↁ":
+        elif char == "ↁ":
             if previous == "m":
                 ergebnis+= 5000-2000
                 continue
             else:
                 ergebnis += 5000
             continue
-        if char == "ↂ":
+        elif char == "ↂ":
             if previous == "m":
                 ergebnis += 10000 - 2000
                 continue
             else:
-             ergebnis += 10000
-             continue
+                ergebnis += 10000
+                continue
+        else:
+            raise RomanConvertException("Keine gültige Zeichen")
         previous = char
     return ergebnis
