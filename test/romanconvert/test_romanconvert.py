@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+from romanconvertkata.RomanConvertException import RomanConvertException
 from romanconvertkata.romanconvert import roman2decimal
 from unittest import TestCase
 import math
@@ -111,7 +111,18 @@ class TestRomanConvert(TestCase):
         self.assertEqual(39999, roman2decimal('ↂↂↂmↂcmxcix'))
 
     def test_random_kombination_ulkige_zeichen(self):
-        """Randomzahlen zwischen 1 und 3999 prüfen"""
+        """Randomzahlen zwischen 4000 und 39999 prüfen"""
         for i in range(0, 100):
             zahl = random.randint(i+4000, 39999)
             self.assertEqual(roman2decimal(_create_roman(zahl)), zahl)
+
+    def test_unbekannte_zeichen_uebergeben(self):
+        """Syntaktische Fehler sollen :class:`RomanConvertException` werfen"""
+        self._syntaktischer_fehler('abc')
+        self._syntaktischer_fehler(123)
+        self._syntaktischer_fehler({'1': 'x'})
+
+    def _syntaktischer_fehler(self, roman: str):
+        with self.assertRaises(RomanConvertException) as context:
+            roman2decimal(roman)
+        self.assertTrue('Eingabe \'%s\' beinhaltet syntaktische Fehler' % roman in context.exception)
