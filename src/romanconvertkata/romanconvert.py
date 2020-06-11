@@ -48,5 +48,19 @@ def roman2decimal(roman: str) -> int:
                 ergebnis += 800
                 continue
             ergebnis += 1000
+        if char == "ↁ":
+            if previous == "m":
+                ergebnis+= 5000-2000
+                continue
+            else:
+                ergebnis += 5000
+            continue
+        if char == "ↂ":
+            if previous == "m":
+                ergebnis += 10000 - 2000
+                continue
+            else:
+             ergebnis += 10000
+             continue
         previous = char
     return ergebnis
