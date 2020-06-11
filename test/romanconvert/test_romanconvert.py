@@ -101,3 +101,17 @@ class TestRomanConvert(TestCase):
         for i in range(1, 100):
             zahl = random.randint(i, 3999)
             self.assertEqual(roman2decimal(_create_roman(zahl)), zahl)
+
+    def test_ulkige_zeichen(self):
+        """Tests für ↁ und ↂ"""
+        self.assertEqual(5000, roman2decimal('ↁ'))
+        self.assertEqual(10000, roman2decimal('ↂ'))
+        self.assertEqual(4000, roman2decimal('mↁ'))
+        self.assertEqual(9000, roman2decimal('mↂ'))
+        self.assertEqual(39999, roman2decimal('ↂↂↂmↂcmxcix'))
+
+    def test_random_kombination_ulkige_zeichen(self):
+        """Randomzahlen zwischen 1 und 3999 prüfen"""
+        for i in range(0, 100):
+            zahl = random.randint(i+4000, 39999)
+            self.assertEqual(roman2decimal(_create_roman(zahl)), zahl)
