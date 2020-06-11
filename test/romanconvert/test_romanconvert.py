@@ -30,3 +30,12 @@ class TestRomanConvert(TestCase):
         self.assertEqual(1000, roman2decimal('m'))
         self.assertEqual(2000, roman2decimal('mm'))
         self.assertEqual(3000, roman2decimal('mmm'))
+
+    def test_subtraktionsregel(self):
+        """iv, ix, xl, xc, cd, cm als Eingabeparameter"""
+        self.assertEqual(4, roman2decimal('iv'))
+        self.assertEqual(9, roman2decimal('ix'))
+        self.assertEqual(40, roman2decimal('xl'))
+        self.assertEqual(90, roman2decimal('xc'))
+        self.assertEqual(400, roman2decimal('cd'))
+        self.assertEqual(900, roman2decimal('cm'))
