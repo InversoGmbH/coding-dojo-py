@@ -16,4 +16,10 @@ def roman2decimal(roman: str) -> int:
     for char in roman:
         if char == "i":
             ergebnis += 1
+        if char == "v":
+            ergebnis += 5
+        if char == "l":
+            ergebnis += 50
+        if char == "d":
+            ergebnis += 500
     return ergebnis
