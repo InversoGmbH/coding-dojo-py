@@ -12,9 +12,10 @@ def roman2decimal(roman: str) -> int:
     :param roman: String mit Römischer Zahl
     :return: Dezimalwert der Römischen Zahl
     """
+    #print( roman )
     ergebnis = 0
     previous = None
-    for char in roman:
+    for char in roman.lower():
         if char == "i":
             ergebnis += 1
         if char == "v":
