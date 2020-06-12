@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import logging
 from romanconvertkata.RomanConvertException import RomanConvertException
 
 
@@ -13,8 +14,8 @@ def roman2decimal(roman: str) -> int:
     :return: Dezimalwert der Römischen Zahl
     """
     # print( roman )
-    fehlermeldung = __pruefe_eingabe(roman)
-    zahlen = __gib_arabische_ziffern(roman, fehlermeldung)
+    __pruefe_eingabe(roman)
+    zahlen = __gib_arabische_ziffern(roman)
     laenge = len(roman)
     zahl = 0
     for i in range(0, laenge - 1):
@@ -41,8 +42,10 @@ numeri_romani = {
     "ↂ": 10000
 }
 
+fehler_syntax = "Eingabe {0} beinhaltet syntaktische Fehler"
 
-def __gib_arabische_ziffern(numerus_romanus: str, fehlermeldung: str):
+
+def __gib_arabische_ziffern(numerus_romanus: str):
     """
     Erzeugen einer Liste von Zahlen für die römischen Ziffern
     """
@@ -51,7 +54,7 @@ def __gib_arabische_ziffern(numerus_romanus: str, fehlermeldung: str):
         try:
             return numeri_romani[r]
         except KeyError:
-            raise RomanConvertException(fehlermeldung.format(numerus_romanus))
+            raise RomanConvertException(fehler_syntax.format(numerus_romanus))
 
     roemische_zahl = numerus_romanus.upper()
     zahlen = list(map(__romanus2arabicus, roemische_zahl))
@@ -59,7 +62,13 @@ def __gib_arabische_ziffern(numerus_romanus: str, fehlermeldung: str):
 
 
 def __pruefe_eingabe(eingabe):
-    fehlermeldung = "Eingabe {0} beinhaltet syntaktische Fehler"
+    if eingabe == None or len(eingabe) == 0:
+        raise RomanConvertException('Es wurde keine Eingabe übergeben')
+
     if not isinstance(eingabe, str):
-        raise RomanConvertException(fehlermeldung.format(eingabe))
-    return fehlermeldung
+        raise RomanConvertException(fehler_syntax.format(eingabe))
+
+    return
+
+
+roman2decimal('mmXX')
