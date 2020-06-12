@@ -4,6 +4,8 @@
 import logging
 from romanconvertkata.RomanConvertException import RomanConvertException
 
+logger = logging.getLogger('romanconvertkata')
+
 
 def roman2decimal(roman: str) -> int:
     """
@@ -68,7 +70,10 @@ def __pruefe_eingabe(eingabe):
     if not isinstance(eingabe, str):
         raise RomanConvertException(fehler_syntax.format(eingabe))
 
+    if not (eingabe.islower() or eingabe.isupper()):
+        # warnung = "romanconvertkata: Groß- und Kleinschreibung wurden in der Eingabe '{0}' vermischt"
+        # warnings.warn(warnung.format(eingabe))
+        logger.warning(
+            "Groß- und Kleinschreibung wurden in der Eingabe '{0}' vermischt".format(eingabe))
+
     return
-
-
-roman2decimal('mmXX')
