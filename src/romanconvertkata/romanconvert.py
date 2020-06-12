@@ -66,16 +66,19 @@ def __gib_arabische_ziffern(numerus_romanus: str):
 
 
 def __pruefe_eingabe(eingabe):
-    if eingabe == None or len(eingabe) == 0:
+    if eingabe == None:
         raise RomanConvertException('Es wurde keine Eingabe übergeben')
 
     if not isinstance(eingabe, str):
         raise RomanConvertException(fehler_syntax.format(eingabe))
 
+    if len(eingabe) == 0:
+        raise RomanConvertException('Es wurde keine Eingabe übergeben')
+
     if re.findall("I{4,}|V{2,}|X{4,}|L{2,}|C{4,}|D{2,}|M{4,}|ↁL{2,}", eingabe.upper()):
         raise RomanConvertException(fehler_semantik.format(eingabe))
 
-    if not (eingabe.islower() or eingabe.isupper()):
+    if eingabe.isalpha() and not (eingabe.islower() or eingabe.isupper()):
         logger.warning(
             "Groß- und Kleinschreibung wurden in der Eingabe '{0}' vermischt".format(eingabe))
 
