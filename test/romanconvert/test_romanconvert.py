@@ -130,7 +130,7 @@ class TestRomanConvert(TestCase):
         self._syntaktischer_fehler({'1': 'x'})
 
     def _syntaktischer_fehler(self, roman: str):
-        with self.assertRaisesRegexp(RomanConvertException, 'Eingabe %s beinhaltet syntaktische Fehler' % roman):
+        with self.assertRaisesRegexp(RomanConvertException, "Eingabe '%s' beinhaltet syntaktische Fehler" % roman):
             roman2decimal(roman)
 
     def test_semantischer_fehler(self):
@@ -140,7 +140,7 @@ class TestRomanConvert(TestCase):
         self._semantischer_fehler('VV')
 
     def _semantischer_fehler(self, roman: str):
-        with self.assertRaisesRegexp(RomanConvertException, 'Eingabe %s beinhaltet semantische Fehler' % roman):
+        with self.assertRaisesRegexp(RomanConvertException, "Eingabe '%s' beinhaltet semantische Fehler" % roman):
             roman2decimal(roman)
 
     def test_fehlende_eingabe(self):
@@ -175,5 +175,5 @@ class TestRomanConvert(TestCase):
         eingabe = 'mmXX'
         with self.assertLogs('romanconvertkata', level=logging.WARNING) as cm:
             self.assertEqual(2020, roman2decimal(eingabe))
-        warning = 'WARNING:romanconvertkata:Groß- und Kleinschreibung wurden in der Eingabe %s vermischt' % eingabe
+        warning = "WARNING:romanconvertkata:Groß- und Kleinschreibung wurden in der Eingabe '%s' vermischt" % eingabe
         self.assertIn(warning, cm.output, "Die Warnmeldung '%s' wurde nicht im Logger registriert." % warning)

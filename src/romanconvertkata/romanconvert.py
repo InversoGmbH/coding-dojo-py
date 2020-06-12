@@ -2,9 +2,13 @@
 # -*- coding: utf-8 -*-
 
 import logging
+import re
 from romanconvertkata.RomanConvertException import RomanConvertException
 
 logger = logging.getLogger('romanconvertkata')
+
+fehler_syntax = "Eingabe '{0}' beinhaltet syntaktische Fehler"
+fehler_semantik = "Eingabe '{0}' beinhaltet semantische Fehler"
 
 
 def roman2decimal(roman: str) -> int:
@@ -15,20 +19,20 @@ def roman2decimal(roman: str) -> int:
     :param roman: String mit Römischer Zahl
     :return: Dezimalwert der Römischen Zahl
     """
-    # print( roman )
     __pruefe_eingabe(roman)
     zahlen = __gib_arabische_ziffern(roman)
     laenge = len(roman)
     zahl = 0
-    for i in range(0, laenge - 1):
+    for i in range(0, laenge):
         wert = zahlen[i]
-        wert_nachfolger = zahlen[i + 1]
-        if wert_nachfolger > wert:
+        if i > 0 and zahlen[i - 1] < (wert / 10):
+            raise RomanConvertException(fehler_semantik.format(roman))
+
+        if i < (laenge - 1) and zahlen[i + 1] > wert:
             zahl -= wert
         else:
             zahl += wert
 
-    zahl += zahlen[laenge - 1]
     return zahl
 
 
@@ -43,8 +47,6 @@ numeri_romani = {
     "ↁ": 5000,
     "ↂ": 10000
 }
-
-fehler_syntax = "Eingabe {0} beinhaltet syntaktische Fehler"
 
 
 def __gib_arabische_ziffern(numerus_romanus: str):
@@ -70,10 +72,13 @@ def __pruefe_eingabe(eingabe):
     if not isinstance(eingabe, str):
         raise RomanConvertException(fehler_syntax.format(eingabe))
 
+    if re.findall("I{4,}|V{2,}|X{4,}|L{2,}|C{4,}|D{2,}|M{4,}|ↁL{2,}", eingabe.upper()):
+        raise RomanConvertException(fehler_semantik.format(eingabe))
+
     if not (eingabe.islower() or eingabe.isupper()):
-        # warnung = "romanconvertkata: Groß- und Kleinschreibung wurden in der Eingabe '{0}' vermischt"
-        # warnings.warn(warnung.format(eingabe))
         logger.warning(
             "Groß- und Kleinschreibung wurden in der Eingabe '{0}' vermischt".format(eingabe))
 
     return
+
+# print(roman2decimal('IC'))
