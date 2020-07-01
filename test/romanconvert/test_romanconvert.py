@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from romanconvertkata.RomanConvertException import RomanConvertException
-from romanconvertkata.romanconvert import roman2decimal
-from unittest import TestCase
 import logging
 import math
 import random
+import unittest
+
+from romanconvertkata.RomanConvertException import RomanConvertException
+from romanconvertkata.romanconvert import roman2decimal
 
 
 def _create_roman(zahl: int) -> str:
@@ -56,7 +57,9 @@ def _create_roman(zahl: int) -> str:
     return res
 
 
-class TestRomanConvert(TestCase):
+@unittest.skip("Vergangenes CodingDojo wurde noch nicht vollständig implementiert. " +
+               "Für neues CodingDojo wurden die Tests deaktiviert.")
+class TestRomanConvert(unittest.TestCase):
 
     def assertEqualRoman(self, erwartet: int, eingabe: str):
         self.assertEqual(erwartet, roman2decimal(eingabe),
