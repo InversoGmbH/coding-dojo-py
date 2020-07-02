@@ -3,6 +3,18 @@
 
 from romanconvertkata.RomanConvertException import RomanConvertException
 
+ROMAN_VALUES = {
+    "I": 1,
+    "V": 5,
+    "X": 10,
+    "L": 50,
+    "C": 100,
+    "D": 500,
+    "M": 1000,
+    "ↁ": 5000,
+    "ↂ": 10000
+}
+
 
 def roman2decimal(roman: str) -> int:
     """
@@ -12,57 +24,18 @@ def roman2decimal(roman: str) -> int:
     :param roman: String mit Römischer Zahl
     :return: Dezimalwert der Römischen Zahl
     """
-    #print( roman )
-    ergebnis = 0
-    previous = None
-    for char in roman.lower():
-        if char == "i":
-            ergebnis += 1
-        elif char == "v":
-            if previous == "i":
-                ergebnis += 3
-                continue
-            ergebnis += 5
-        elif char == "l":
-            if previous == "x":
-                ergebnis += 30
-                continue
-            ergebnis += 50
-        elif char == "d":
-            if previous == "c":
-                ergebnis += 300
-                continue
-            ergebnis += 500
-        elif char == "x":
-            if previous == "i":
-                ergebnis += 8
-                continue
-            ergebnis += 10
-        elif char == "c":
-            if previous == "x":
-                ergebnis += 80
-                continue
-            ergebnis += 100
-        elif char == "m":
-            if previous == "c":
-                ergebnis += 800
-                continue
-            ergebnis += 1000
-        elif char == "ↁ":
-            if previous == "m":
-                ergebnis+= 5000-2000
-                continue
-            else:
-                ergebnis += 5000
-            continue
-        elif char == "ↂ":
-            if previous == "m":
-                ergebnis += 10000 - 2000
-                continue
-            else:
-                ergebnis += 10000
-                continue
-        else:
-            raise RomanConvertException("Keine gültige Zeichen")
-        previous = char
-    return ergebnis
+    roman = roman.upper()
+    for c in roman:
+        if c not in ROMAN_VALUES.keys():
+            raise RomanConvertException(f"{c} from {roman} is not a roman number")
+
+    result = 0
+    previousValue = 0
+    for c in roman:
+        currentValue = ROMAN_VALUES[c]
+        if previousValue < currentValue:
+            result -= previousValue
+            result -= previousValue
+        result += currentValue
+
+    return result
