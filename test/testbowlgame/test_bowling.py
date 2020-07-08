@@ -21,14 +21,13 @@ class BowlingGameTestCase(AbstractBowlHelper.GameHelper):
         self.game = BowlingGame()
         self.frame = BowlingFrame()
 
-    @unittest.skip
     def test_frame_change(self):
         """Null-Wurf beendet Frame und lässt Spiel einen neuen Erzeugen"""
         # Prepare
         old_frame = self.game.get_frame()
         old_frame.shot(0)
         old_frame2 = self.game.get_frame()
-        old_frame.shot(0)
+        old_frame2.shot(0)
         new_frame = self.game.get_frame()
 
         # Test
