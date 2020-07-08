@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-from unittest import skip
 
 from bowlgame.bowlexception import BowlToManyShots
 from bowlgame.bowlingframe import BowlingFrame
@@ -22,7 +21,6 @@ class BowlingGameTestCase(AbstractBowlHelper.GameHelper):
         self.game = BowlingGame()
         self.frame = BowlingFrame()
 
-    @skip
     def test_frame_change(self):
         """Null-Wurf beendet Frame und lässt Spiel einen neuen Erzeugen"""
         # Prepare
