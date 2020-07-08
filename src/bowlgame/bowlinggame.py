@@ -5,6 +5,7 @@ from bowlgame.bowlingframe import BowlingFrame
 
 class BowlingGame:
     """Klasse für ein Bowlingspiel, welches aus 10 BowlingFrames besteht."""
+
     def get_score(self):
         return 0
 
@@ -13,4 +14,3 @@ class BowlingGame:
 
     def get_frame(self):
         return BowlingFrame()
-
