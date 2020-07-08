@@ -14,7 +14,7 @@ class KegelFrame:
             raise BowlToManyPins()
         if self.finished:
             raise BowlToManyShots()
-        if self.MAXIMUM_POINTS_PER_SHOT < s:
+        if self.MAXIMUM_POINTS_PER_SHOT < s or s == 0:
             self.finished = True
         else:
             self.points += s
