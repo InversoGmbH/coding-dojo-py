@@ -203,3 +203,6 @@ fabric.properties
 
 # Vorbereitete Tests nicht einchecken
 test/*/*_praeparat.py
+
+# Customer ignores
+.idea/coding-dojo.iml

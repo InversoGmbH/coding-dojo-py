@@ -4,3 +4,6 @@
 
 class BowlingFrame:
     """Klasse für einen Durchgang beim Bowlingspiel"""
+
+    def __init__(self):
+        pass
