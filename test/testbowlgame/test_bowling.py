@@ -22,7 +22,7 @@ class BowlingGameTestCase(AbstractBowlHelper.GameHelper):
         self.frame = BowlingFrame()
 
     def test_frame_change(self):
-        """Null-Wurf beendet Frame und lässt Spiel einen neuen Erzeugen"""
+        """Nach Beendigung des Durchgangs gibt es einen neuen Durchgang"""
         # Prepare
         old_frame = self.game.get_frame()
         old_frame.shot(0)
