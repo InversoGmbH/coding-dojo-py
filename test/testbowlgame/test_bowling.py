@@ -25,10 +25,12 @@ class BowlingGameTestCase(AbstractBowlHelper.GameHelper):
         # Prepare
         old_frame = self.game.get_frame()
         old_frame.shot(0)
+        old_frame2 = self.game.get_frame()
         old_frame.shot(0)
         new_frame = self.game.get_frame()
 
         # Test
+        self.assertEqual(old_frame, old_frame2)
         self.assertNotEqual(old_frame, new_frame)
 
 
