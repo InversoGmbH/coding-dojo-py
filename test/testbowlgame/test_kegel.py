@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 
 import unittest
+import random
 
-from bowlgame.bowlexception import BowlToManyShots
+from bowlgame.bowlexception import BowlToManyShots, BowlToManyPins, BowlGameEnds
 from bowlgame.kegelframe import KegelFrame
 from bowlgame.kegelgame import KegelGame
 from test.testbowlgame.helper import AbstractBowlHelper
@@ -23,6 +24,26 @@ class KegelGameTestCase(AbstractBowlHelper.GameHelper):
         # Wird für abstrakte Testfälle in helper.AbstractBowlHelper.GameHelper benötigt
         self.game = KegelGame()
         self.frame = KegelFrame()
+
+    def test_frame_change_zero_shot(self):
+        """Null-Wurf beendet Frame und lässt Spiel einen neuen Erzeugen"""
+        # Prepare
+        old_frame = self.game.get_frame()
+        old_frame.shot(0)
+        new_frame = self.game.get_frame()
+
+        # Test
+        self.assertNotEqual(old_frame, new_frame)
+
+    def test_frame_change_to_big_shot(self):
+        """zu großer Wurf beendet Frame und lässt Spiel einen neuen Erzeugen"""
+        # Prepare
+        old_frame = self.game.get_frame()
+        old_frame.shot(random.randint(4, MAXIMUM_PINS))
+        new_frame = self.game.get_frame()
+
+        # Test
+        self.assertNotEqual(old_frame, new_frame)
 
 
 class KegelFrameTestCase(AbstractBowlHelper.FrameHelper):
