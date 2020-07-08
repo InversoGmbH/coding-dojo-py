@@ -9,12 +9,12 @@ class BowlingFrame:
     """Klasse für einen Durchgang beim Bowlingspiel"""
 
     def shot(self, s):
-        if s > MAXIMUM_PINS:
+        if s > self.pins:
             raise BowlToManyPins()
         self.shots = self.shots + 1
         if self.shots > 2:
             raise BowlToManyShots()
-        if self.pins <= 0:
+        if self.pins == 0:
             raise BowlToManyShots()
         self.pins = self.pins - s
 
