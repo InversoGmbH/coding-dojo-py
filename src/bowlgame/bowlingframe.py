@@ -7,6 +7,9 @@ class BowlingFrame:
     """Klasse für einen Durchgang beim Bowlingspiel"""
     MAXIMUM_PINS = 10
 
+    def getScore(self):
+        return self.MAXIMUM_PINS - self.pins
+
     def shot(self, s):
         if s > self.pins:
             raise BowlToManyPins()

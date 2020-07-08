@@ -10,7 +10,7 @@ class BowlingGame:
         self.frame = BowlingFrame()
 
     def get_score(self):
-        return 0
+        return self.frame.getScore()
 
     def is_frame(self):
         return 1
