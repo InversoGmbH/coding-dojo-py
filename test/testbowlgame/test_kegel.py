@@ -3,6 +3,7 @@
 
 import unittest
 
+from bowlgame.bowlexception import BowlToManyShots
 from bowlgame.kegelframe import KegelFrame
 from bowlgame.kegelgame import KegelGame
 from test.testbowlgame.helper import AbstractBowlHelper
@@ -31,6 +32,21 @@ class KegelFrameTestCase(AbstractBowlHelper.FrameHelper):
         """Präpariert für jeden Test einen neuen Frame"""
         self.frame = KegelFrame()
         self.maximum_pins = MAXIMUM_PINS
+
+    def test_to_many_shots(self):
+        """Exception-Test auf zuviele Würfe"""
+        # prepare
+        self.frame.shot(MAXIMUM_PINS)
+        with self.assertRaises(BowlToManyShots):
+            self.frame.shot(MAXIMUM_PINS)
+
+    def test_pin_recovery(self):
+        """Pins sollen bei jedem Wurf zurück gesetzt werden"""
+        try:
+            for _ in range(0, MAXIMUM_PINS * 2):
+                self.frame.shot(1)
+        except Exception as e:
+            self.fail("Beim Versuch von %i Einer-Würfen, kam es zu einem Fehler: %s" % (MAXIMUM_PINS * 2, str(e)))
 
 
 if __name__ == '__main__':
