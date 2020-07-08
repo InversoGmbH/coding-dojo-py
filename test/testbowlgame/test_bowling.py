@@ -34,6 +34,13 @@ class BowlingGameTestCase(AbstractBowlHelper.GameHelper):
         self.assertEqual(old_frame, old_frame2)
         self.assertNotEqual(old_frame, new_frame)
 
+    def test_get_score(self):
+        self.assertEqual(self.game.get_score(), 0)
+        self.game.get_frame().shot(1)
+        self.assertEqual(self.game.get_score(), 1)
+        self.game.get_frame().shot(7)
+        self.assertEqual(self.game.get_score(), 8)
+
 
 class BowlingFrameTestCase(AbstractBowlHelper.FrameHelper):
     """Testfälle für BowlingFrame"""
