@@ -7,17 +7,22 @@ class KegelFrame:
     """Klasse für einen Durchgang beim Kegelspiel"""
     MAXIMUM_PINS = 9
 
+    MAXIMUM_POINTS_PER_SHOT = 3
+
     def shot(self, s):
         if s > self.pins:
             raise BowlToManyPins()
-        if self.is_finished():
+        if self.finished:
             raise BowlToManyShots()
-        self.shots = self.shots + 1
-        self.pins = self.pins - s
+        if self.MAXIMUM_POINTS_PER_SHOT < s:
+            self.finished = True
+        else:
+            self.points += s
 
     def is_finished(self):
-        return self.pins == 0 or self.shots >= 2
+        return self.finished
 
     def __init__(self):
-        self.shots = 0
         self.pins = self.MAXIMUM_PINS
+        self.finished = False
+        self.points = 0
